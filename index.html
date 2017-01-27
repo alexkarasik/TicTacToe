@@ -17,40 +17,67 @@
 
 
 <h1>Tic Tac Toe</h1>
-<form id="sign-up">
-        <fieldset>
-          <legend>Sign up!</legend>
-          <label>
-            Email
-            <input type="text" name="credentials[email]">
-          </label>
-          <label>
-            Password
-            <input type="password" name="credentials[password]">
-          </label>
-          <label>
-            Password Confirmation
-            <input type="password" name="credentials[password_confirmation]">
-          </label>
-          <input type="submit" name="submit" value="Sign up!">
-        </fieldset>
-      </form>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
 
-      <form id="sign-in">
-        <fieldset>
-          <legend>Sign in!</legend>
-          <label>
-            Email
-            <input type="text" name="credentials[email]">
-          </label>
-          <label>
-            Password
-            <input type="password" name="credentials[password]">
-          </label>
-          <input type="submit" name="submit" value="Sign in!">
-        </fieldset>
-      </form>
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <form id="sign-up">
+              <fieldset>
+                <legend>Sign up!</legend>
+                <label>
+                  Email
+                  <input type="text" name="credentials[email]">
+                </label>
+                <label>
+                  Password
+                  <input type="password" name="credentials[password]">
+                </label>
+                <label>
+                  Password Confirmation
+                  <input type="password" name="credentials[password_confirmation]">
+                </label>
+                <input type="submit" name="submit" value="Sign up!">
+              </fieldset>
+            </form>
 
+    </div>
+  </div>
+</div>
+
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button> -->
+
+<!-- <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <form id="sign-up">
+              <fieldset>
+                <form id="sign-in">
+                  <fieldset>
+                    <legend>Sign in!</legend>
+                    <label>
+                      Email
+                      <input type="text" name="credentials[email]">
+                    </label>
+                    <label>
+                      Password
+                      <input type="password" name="credentials[password]">
+                    </label>
+                    <input type="submit" name="submit" value="Sign in!">
+                  </fieldset>
+                </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
       <form id="change-password">
         <fieldset>
           <legend>Change Password!</legend>
@@ -66,13 +93,27 @@
           <input type="submit" name="submit" value="Change Password!">
         </fieldset>
     </form>
+    </div>
+  </div>
+</div>
 
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Sign Out</button>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
       <form id="sign-out">
        <fieldset>
          <legend>Sign Out!</legend>
          <input type="submit" name="submit" value="Sign Out!">
        </fieldset>
      </form>
+    </div>
+  </div>
+</div> -->
+
+
 
 <div id="board">
 
