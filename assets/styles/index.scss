@@ -11,9 +11,9 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 
 h1
  {
-  text-align: center;
   color: #red;
   font-family: 'Lobster', cursive;
+  text-align: center;
 }
 
 #board {
@@ -28,8 +28,7 @@ h1
   width: 100px;
   height: 100px;
   border-right: 3px solid black;
-  border-bottom: 3px solid black;
-  font-size: 100px;
+  font-size: 80px;
   text-align: center;
   transition: background-color 1s ease;
 }
@@ -42,6 +41,20 @@ h1
 .cell:nth-of-type(3) {
   border-right: 0;
 }
+
+.cell:nth-of-type(1n),
+.cell:nth-of-type(2n),
+.cell:nth-of-type(3n) {
+  border-bottom: 3px;
+}
+
+
+.cell:nth-of-type(4n),
+.cell:nth-of-type(5n),
+.cell:nth-of-type(6n) {
+  border-bottom: 3px;
+}
+
 
 .cell:nth-of-type(7n),
 .cell:nth-of-type(8n),

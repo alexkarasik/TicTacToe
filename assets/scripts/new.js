@@ -3,16 +3,18 @@ const board = ['', '', '', '', '', '', '', '', ''];
 let currentPlayer = 'X';
 // let player1 = 'X';
 // let player2 = 'O';
-let newGame = $('#reset');
+// let newGame = $('#');
 
 const resetGameBoard = function() {
   for (let i = 0; i < board.length; i++) {
     board[i] = '';
     $('.box').text('');
     //$('.win').text('');
-    currentPlayer = 'X';
   }
+  currentPlayer = 'X';
 };
+
+
 
 let endGame = function() {
   $('.box').off('click');
@@ -71,20 +73,27 @@ let flipPlayer = function(index) {
 
 let boxes = $('.box');
 
-boxes.on('click', function(event) {
+let clearIt = boxes.on('click', function(event) {
   if ($(event.target).text() === '') {
     $(event.target).text(currentPlayer);
     // $(this).addClass(player1);
-    // changeTurn();
   }
   let conversion = parseInt(event.target.id);
   flipPlayer(conversion);
   console.log(board);
 });
 
-newGame.on('click', function() {
-  resetGameBoard();
-});
+// $('#play-again').on('click', () => {
+//   resetGameBoard();
+// });
+//
+// $('#past-games').on('click', ()=> {
+//
+// });
+
+// showHistory.on('click', function(){
+//
+// });
 
 
 // let count = 0;
@@ -119,7 +128,7 @@ module.exports = {
   resetGameBoard,
   flipPlayer,
   endGame,
-  newGame
+  clearIt
 };
 // 'use strict';
 //

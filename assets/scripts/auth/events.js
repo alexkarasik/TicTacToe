@@ -7,6 +7,12 @@ const ui = require('./ui');
 
 const store = require('../store');
 
+const engine = require('../new.js');
+
+//const connect = require ('../new.js');
+
+
+
 const onSignUp = function (event) {
   event.preventDefault();
 
@@ -62,14 +68,29 @@ const onSignOut = function (event) {
 //   })
 // }
 
-
-const onCreateGame = function(event){
+const onShowGames = function(event){
   event.preventDefault();
-  let data = getFormFields(event.target);
-  api.createGame(data)
+  api.showGames()
   .then(ui.success)
   .catch(ui.failure);
 };
+
+
+const onCreateGame = function(event){
+  event.preventDefault();
+  api.createGame();
+  engine.resetGameBoard();
+
+};
+
+
+// const showHistory = function(event) {
+//   event.preventDefault();
+//
+//   api.index()
+//     .then(ui.onStatSuccess)
+//     .catch(ui.onError);
+// };
 
 // const onCreateGame = function (event) {
 //    return $.ajax({
@@ -108,7 +129,14 @@ const addHandlers = () => {
   $('#sign-in').on('submit', onSignIn);
   $('#sign-up').on('submit', onSignUp);
   $('#change-password').on('submit', onChangePassword);
-  $('#sign-out').on('submit', onSignOut);
+  $('#sign-out').on('click', onSignOut);
+  $('#previous-games').on('click', onShowGames);
+  $('#play-again').on('click', onCreateGame);
+
+
+  //$('#play-again').on('click', resetGameBoard);
+  //$('#previous-games').on('click', onShowGames);
+
   //$("#reset").on('click', createGame);
 };
 
@@ -119,5 +147,6 @@ module.exports = {
   onSignIn,
   onChangePassword,
   onSignOut,
-  onCreateGame
+  onShowGames,
+  onCreateGame,
 };
