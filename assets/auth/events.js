@@ -1,75 +1,79 @@
 'use strict';
-let currentPlayer = 'X';
-let player1 = 'X';
-let player2 = 'O';
-let activeGame = true;
-const board = ['', '', '', '', '', '', '', '', ''];
-const resetGameBoard = function () {
-  for (let i = 0; i < board.length; i++) {
-    board[i] = '';
-    $('#' + i).text(''); // + combines the two strings
-    $('.message').text('');
-  }
+const api = require('./api');
+const ui = require('./ui');
+const getFormFields = require('../../../lib/get-form-fields.js');
+const store = require('../store');
+const engine = require('../game/new.js');
+const onSignUp = function (event) {
+  event.preventDefault();
+  let data = getFormFields(event.target);
+  api.signUp(data)
+ .done(ui.success)
+ .fail(ui.fail);
 };
-let possibleWins = function () {
-  if ((board[0] === 'X' && board[1] === 'X' && board[2] === 'X') ||
-      (board[3] === 'X' && board[4] === 'X' && board[5] === 'X') ||
-      (board[6] === 'X' && board[7] === 'X' && board[8] === 'X') ||
-      (board[0] === 'X' && board[3] === 'X' && board[6] === 'X') ||
-      (board[1] === 'X' && board[4] === 'X' && board[7] === 'X') ||
-      (board[2] === 'X' && board[5] === 'X' && board[8] === 'X') ||
-      (board[0] === 'X' && board[4] === 'X' && board[8] === 'X') ||
-      (board[2] === 'X' && board[4] === 'X' && board[6] === 'X')) {
-    $('.message').text('X wins!');
-    activeGame = false;
-  } else if ((board[0] === 'O' && board[1] === 'O' && board[2] === 'O') ||
-      (board[3] === 'O' && board[4] === 'O' && board[5] === 'O') ||
-      (board[6] === 'O' && board[7] === 'O' && board[8] === 'O') ||
-      (board[0] === 'O' && board[3] === 'O' && board[6] === 'O') ||
-      (board[1] === 'O' && board[4] === 'O' && board[7] === 'O') ||
-      (board[2] === 'O' && board[5] === 'O' && board[8] === 'O') ||
-      (board[0] === 'O' && board[4] === 'O' && board[8] === 'O') ||
-      (board[2] === 'O' && board[4] === 'O' && board[6] === 'O')) {
-    $('.message').text('O wins!');
-    activeGame = false;
-  } else { // will tell draw, doesnt tell when draw has already happened
-    let areThereOpenSquaresLeft = false;
-    for (let i = 0; i < board.length; i++) {
-      if (board[i] === '') {
-        areThereOpenSquaresLeft = true;
-      }
-    }
-    if (areThereOpenSquaresLeft === false) {
-        $('.message').text('DRAW!!!');
-    }
-  }
+const onSignIn = function (event) {
+  event.preventDefault();
+  let data = getFormFields(event.target);
+  api.signIn(data)
+  .done((response) => {
+    store.user = response.user;
+    return store.user;
+  })
+ .done(ui.signInSuccess)
+ .fail(ui.fail);
 };
-const switchTurn = function (index) {
-  if (board[index] === '' && activeGame === true) {
-    board[index] = currentPlayer;
-    possibleWins();
-    if (currentPlayer === player1) {
-      currentPlayer = player2;
-    } else {
-      currentPlayer = player1;
-    }
-  }
-  return board[index];
+const onSignOut = function (event) {
+  event.preventDefault();
+  let data = getFormFields(event.target);
+  api.signOut(data)
+ .done(ui.signOutSuccess)
+ .fail(ui.fail);
+};
+const onChangePassword = function (event) {
+  event.preventDefault();
+  let data = getFormFields(event.target);
+  api.changePassword(data)
+ .done(ui.changePasswordSuccess)
+ .fail(ui.fail);
+};
+const onShowGames = function (event) {
+  event.preventDefault();
+  api.showGames()
+ .done(function (response) {
+    $('.message').text('Number of Played Games is ' + response.games.length);
+ })
+ .fail(ui.fail);
+};
+const onCreateGames = function (event) {
+  event.preventDefault();
+  api.createGames()
+    .done((response) => {
+      store.game = response.game;
+      return store.game;
+    })
+ .done(ui.success)
+ .fail(ui.fail);
 };
 $('.square').on('click', (event) => {
   let currentSquare = event.currentTarget.id;
-  let moveSuccess = switchTurn(currentSquare);
+  let moveSuccess = engine.switchTurn(currentSquare);
    $(event.currentTarget).text(moveSuccess);
 });
 $('#play-again-button').on('click', () => {
-  resetGameBoard();
+  engine.resetGameBoard();
 });
-module.exports = {
-  'switchTurn': switchTurn,
-  'possibleWins': possibleWins,
-  'resetGameBoard': resetGameBoard
+const addHandlers = () => {
+  $('#sign-up').on('submit', onSignUp);
+  $('#sign-in').on('submit', onSignIn);
+  $('#sign-out').on('submit', onSignOut);
+  $('#change-password').on('submit', onChangePassword);
+  $('#previous-games').on('click', onShowGames);
+  $('#play-again-button').on('click', onCreateGames);
 };
-
+module.exports = {
+  addHandlers,
+  onCreateGames,
+};
 
 // 'use strict';
 //
