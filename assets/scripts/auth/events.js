@@ -11,7 +11,7 @@ const onSignUp = function (event) {
   let data = getFormFields(event.target);
   api.signUp(data)
  .then(ui.success)
- .fail(ui.failure);
+ .catch(ui.failure);
 };
 
 
@@ -24,7 +24,7 @@ const onSignIn = function (event) {
     return store.user;
   })
  .then(ui.success)
- .fail(ui.failure);
+ .catch(ui.failure);
 };
 
 
@@ -33,7 +33,7 @@ const onSignOut = function (event) {
   let data = getFormFields(event.target);
   api.signOut(data)
  .then(ui.success)
- .fail(ui.failure);
+ .catch(ui.failure);
 };
 
 
@@ -42,7 +42,7 @@ const onChangePassword = function (event) {
   let data = getFormFields(event.target);
   api.changePassword(data)
  .then(ui.success)
- .fail(ui.failure);
+ .catch(ui.failure);
 };
 
 
@@ -52,7 +52,7 @@ const onShowGames = function (event) {
  .then(function (response) {
     $('.message').text('Number of Played Games is ' + response.games.length);
  })
- .fail(ui.failure);
+ .catch(ui.failure);
 };
 
 
@@ -64,8 +64,10 @@ const onCreateGames = function (event) {
       return store.game;
     })
  .then(ui.success)
- .fail(ui.failure);
+ .catch(ui.failure);
+ engine.resetGameBoard();
 };
+
 
 
 
@@ -80,11 +82,11 @@ const addHandlers = () => {
     let currentSquare = parseInt(event.target.id);
     let moveSuccess =  engine.switchTurn(currentSquare);
      $(event.target).text(moveSuccess);
+
   });
 
-  $('#play-again-button').on('click', () => {
-    engine.resetGameBoard();
-  });
+
+
 
 };
 module.exports = {

@@ -16,6 +16,7 @@ const signIn = function (data) {
     data,
   });
 };
+
 const changePassword = function (data) {
   return $.ajax({
     url: `${config.apiOrigin}/change-password/${store.user.id}`,
@@ -26,6 +27,7 @@ const changePassword = function (data) {
     data,
   });
 };
+
 const signOut = function () {
   return $.ajax({
     url: `${config.apiOrigin}/sign-out/${store.user.id}`,
@@ -35,6 +37,7 @@ const signOut = function () {
     },
   });
 };
+
 const showGames = function () {
   return $.ajax({
     url: config.apiOrigin + '/games',
@@ -55,6 +58,7 @@ const createGames = function (data) {
   data
   });
 };
+
 const updateGame = function(index, currentPlayer, status) {
   return $.ajax({
     url: config.apiOrigin + '/games' + store.game.id,

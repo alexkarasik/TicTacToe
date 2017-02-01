@@ -60,9 +60,9 @@ const switchTurn = function (index) {
   return board[index];
 };
 module.exports = {
-  'switchTurn': switchTurn,
-  'possibleWins': possibleWins,
-  'resetGameBoard': resetGameBoard
+    switchTurn,
+   possibleWins,
+  resetGameBoard
 };
 // 'use strict';
 // const board = ['', '', '', '', '', '', '', '', ''];
