@@ -1,24 +1,20 @@
 'use strict';
-
 const config = require('../config');
 const store = require('../store');
-
-const signUp = function(data){
+const signUp = function (data) {
   return $.ajax({
     url: config.apiOrigin + '/sign-up',
     method: 'POST',
     data,
   });
 };
-
-const signIn = function(data){
+const signIn = function (data) {
   return $.ajax({
     url: config.apiOrigin + '/sign-in',
     method: 'POST',
     data,
   });
 };
-
 const changePassword = function (data) {
   return $.ajax({
     url: `${config.apiOrigin}/change-password/${store.user.id}`,
@@ -29,7 +25,6 @@ const changePassword = function (data) {
     data,
   });
 };
-
 const signOut = function () {
   return $.ajax({
     url: `${config.apiOrigin}/sign-out/${store.user.id}`,
@@ -39,66 +34,55 @@ const signOut = function () {
     },
   });
 };
-
- const showHistory = function(data){
-   return $.ajax({
-     url: config.apiOrigin + '/sign-up',
-     method: 'POST',
-     data,
-   });
- };
-
- const index = function (over) {
-   if (over) {
-     return $.ajax({
-       url: config.apiOrigin + '/games?=over',
-       method: 'GET',
-       headers: {
-         Authorization: `Token token=${store.user.token}`,
-       },
-     });
-   } else {
-     return $.ajax({
-       url: config.apiOrigin + '/games',
-       method: 'GET',
-       headers: {
-         Authorization: `Token token=${store.user.token}`,
-       },
-     });
-   }
- };
-//
-const createGame = function(data){
-
+const showGames = function () {
   return $.ajax({
-    url: config.apiOrigin + '/games/',
-    method: 'POST',
-    header: {
-      Authorization: `Token token=${store.user.token}`
-    },
-  data
+    url: config.apiOrigin + '/games',
+    method: 'GET',
+    headers: {
+    Authorization: `Token token=${store.user.token}`
+  },
   });
 };
 
-
-const update = function (id, data) {
+const createGames = function (data) {
   return $.ajax({
-    url: config.apiOrigin + '/games/' + id,
+    url: config.apiOrigin + '/games',
+    method: 'POST',
+    headers: {
+    Authorization: `Token token=${store.user.token}`
+  },
+  data
+  });
+};
+const updateGame = function(index, currentPlayer, status) {
+  return $.ajax({
+    url: config.apiOrigin + '/games' + store.game.id,
     method: 'PATCH',
     headers: {
-      Authorization: `Token token=${store.user.token}`,
+      Authorization: `Token token=${store.user.token}`
     },
     data: {
       game: {
         cell: {
-          index: data.index,
-          value: data.value,
+          index: index,
+          value: currentPlayer,
         },
-        over: data.over,
-      },
+        over: status,
+      }
     },
   });
 };
+module.exports = {
+  signUp,
+  signIn,
+  changePassword,
+  signOut,
+  createGames,
+  showGames,
+  updateGame,
+};
+
+
 
 // const updateGame = function(id){
 //   return $.ajax({
@@ -121,13 +105,13 @@ const update = function (id, data) {
 // );};
 
 //const updateGamesuccess
-module.exports = {
-  signUp,
-  signIn,
-  changePassword,
-  signOut,
-  createGame,
-  showHistory,
-  index,
-  update,
-};
+// module.exports = {
+//   signUp,
+//   signIn,
+//   changePassword,
+//   signOut,
+//   createGame,
+//   showHistory,
+//   index,
+//   updateTTC,
+// };
