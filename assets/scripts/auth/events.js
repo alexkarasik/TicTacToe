@@ -11,7 +11,7 @@ const onSignUp = function (event) {
   let data = getFormFields(event.target);
   api.signUp(data)
  .then(ui.success)
- .fail(ui.fail);
+ .fail(ui.failure);
 };
 
 
@@ -23,8 +23,8 @@ const onSignIn = function (event) {
     store.user = response.user;
     return store.user;
   })
- .then(ui.signInSuccess)
- .fail(ui.fail);
+ .then(ui.success)
+ .fail(ui.failure);
 };
 
 
@@ -32,8 +32,8 @@ const onSignOut = function (event) {
   event.preventDefault();
   let data = getFormFields(event.target);
   api.signOut(data)
- .then(ui.signOutSuccess)
- .fail(ui.fail);
+ .then(ui.success)
+ .fail(ui.failure);
 };
 
 
@@ -41,8 +41,8 @@ const onChangePassword = function (event) {
   event.preventDefault();
   let data = getFormFields(event.target);
   api.changePassword(data)
- .then(ui.changePasswordSuccess)
- .fail(ui.fail);
+ .then(ui.success)
+ .fail(ui.failure);
 };
 
 
@@ -52,7 +52,7 @@ const onShowGames = function (event) {
  .then(function (response) {
     $('.message').text('Number of Played Games is ' + response.games.length);
  })
- .fail(ui.fail);
+ .fail(ui.failure);
 };
 
 
@@ -64,18 +64,10 @@ const onCreateGames = function (event) {
       return store.game;
     })
  .then(ui.success)
- .fail(ui.fail);
+ .fail(ui.failure);
 };
 
-$('.square').on('click', (event) => {
-  let currentSquare = event.currentTarget.id;
-  let moveSuccess =  engine.switchTurn(currentSquare);
-   $(event.currentTarget).text(moveSuccess);
-});
 
-$('#play-again-button').on('click', () => {
-  engine.resetGameBoard();
-});
 
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp);
@@ -84,6 +76,16 @@ const addHandlers = () => {
   $('#change-password').on('submit', onChangePassword);
   $('#previous-games').on('click', onShowGames);
   $('#play-again-button').on('click', onCreateGames);
+  $('.square').on('click', (event) => {
+    let currentSquare = parseInt(event.target.id);
+    let moveSuccess =  engine.switchTurn(currentSquare);
+     $(event.target).text(moveSuccess);
+  });
+
+  $('#play-again-button').on('click', () => {
+    engine.resetGameBoard();
+  });
+
 };
 module.exports = {
   addHandlers,
@@ -105,7 +107,7 @@ module.exports = {
 //
 //   api.signUp(data)
 //     .then(ui.success)
-//     .catch(ui.failure);
+//     .catch(ui.faiure);
 //
 // };
 //

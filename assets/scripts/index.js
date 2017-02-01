@@ -2,11 +2,15 @@
 
 const setAPIOrigin = require('../../lib/set-api-origin');
 const config = require('./config');
-require('./new');
+const engine = require('./new');
+const link = require('./auth/events.js')
 
 $(() => {
   setAPIOrigin(location, config);
+  link.addHandlers();
 });
+
+
 
 //$('#id1').on('click', (event)=>){
 

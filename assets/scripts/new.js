@@ -4,13 +4,16 @@ let player1 = 'X';
 let player2 = 'O';
 let activeGame = true;
 const board = ['', '', '', '', '', '', '', '', ''];
+
 const resetGameBoard = function () {
   for (let i = 0; i < board.length; i++) {
     board[i] = '';
+    activeGame = true;
     $('#' + i).text(''); // + combines the two strings
     $('.message').text('');
   }
 };
+
 let possibleWins = function () {
   if ((board[0] === 'X' && board[1] === 'X' && board[2] === 'X') ||
       (board[3] === 'X' && board[4] === 'X' && board[5] === 'X') ||
