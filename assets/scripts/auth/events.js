@@ -68,9 +68,6 @@ const onCreateGames = function (event) {
  engine.resetGameBoard();
 };
 
-
-
-
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp);
   $('#sign-in').on('submit', onSignIn);
@@ -82,7 +79,8 @@ const addHandlers = () => {
     let currentSquare = parseInt(event.target.id);
     let moveSuccess =  engine.switchTurn(currentSquare);
      $(event.target).text(moveSuccess);
-
+    let status = engine.possibleWins;
+    api.updateGame(currentSquare, moveSuccess, status);
   });
 
 

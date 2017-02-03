@@ -8,8 +8,8 @@ const board = ['', '', '', '', '', '', '', '', ''];
 const resetGameBoard = function () {
   for (let i = 0; i < board.length; i++) {
     board[i] = '';
-    activeGame = true;
-    $('#' + i).text(''); // + combines the two strings
+    activeGame = false;
+    $('#' + i).text('');
     $('.message').text('');
   }
 };
@@ -24,7 +24,8 @@ let possibleWins = function () {
       (board[0] === 'X' && board[4] === 'X' && board[8] === 'X') ||
       (board[2] === 'X' && board[4] === 'X' && board[6] === 'X')) {
     $('.message').text('X wins!');
-    activeGame = false;
+    return true;
+
   } else if ((board[0] === 'O' && board[1] === 'O' && board[2] === 'O') ||
       (board[3] === 'O' && board[4] === 'O' && board[5] === 'O') ||
       (board[6] === 'O' && board[7] === 'O' && board[8] === 'O') ||
@@ -34,17 +35,11 @@ let possibleWins = function () {
       (board[0] === 'O' && board[4] === 'O' && board[8] === 'O') ||
       (board[2] === 'O' && board[4] === 'O' && board[6] === 'O')) {
     $('.message').text('O wins!');
-    activeGame = false;
-  } else { // will tell draw, doesnt tell when draw has already happened
-    let areThereOpenSquaresLeft = false;
-    for (let i = 0; i < board.length; i++) {
-      if (board[i] === '') {
-        areThereOpenSquaresLeft = true;
-      }
-    }
-    if (areThereOpenSquaresLeft === false) {
+    return true;
+  } else if (board.includes('') === false){
+
         $('.message').text('DRAW!!!');
-    }
+        return true;
   }
 };
 const switchTurn = function (index) {
@@ -59,6 +54,8 @@ const switchTurn = function (index) {
   }
   return board[index];
 };
+
+
 module.exports = {
     switchTurn,
    possibleWins,
