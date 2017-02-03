@@ -1,14 +1,17 @@
 'use strict';
+
+const api = require('./auth/api');
+
 let currentPlayer = 'X';
 let player1 = 'X';
 let player2 = 'O';
-let activeGame = true;
+let over = false;
 const board = ['', '', '', '', '', '', '', '', ''];
 
 const resetGameBoard = function () {
   for (let i = 0; i < board.length; i++) {
     board[i] = '';
-    activeGame = false;
+    over = false;
     $('#' + i).text('');
     $('.message').text('');
   }
@@ -43,23 +46,30 @@ let possibleWins = function () {
   }
 };
 const switchTurn = function (index) {
-  if (board[index] === '' && activeGame === true) {
+  if (board[index] === '') {
     board[index] = currentPlayer;
-    possibleWins();
+    over = possibleWins();
+    api.updateGame(index, currentPlayer, over);
     if (currentPlayer === player1) {
       currentPlayer = player2;
-    } else {
+    } else if (currentPlayer === player2) {
       currentPlayer = player1;
     }
   }
-  return board[index];
+
 };
+
+  $('.square').on('click', (event) => {
+    $(event.target).text(currentPlayer);
+    switchTurn(parseInt(event.target.id));
+  });
 
 
 module.exports = {
     switchTurn,
    possibleWins,
-  resetGameBoard
+  resetGameBoard,
+
 };
 // 'use strict';
 // const board = ['', '', '', '', '', '', '', '', ''];

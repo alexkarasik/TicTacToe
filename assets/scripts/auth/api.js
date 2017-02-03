@@ -59,7 +59,7 @@ const createGames = function (data) {
   });
 };
 
-const updateGame = function(index, currentPlayer, status) {
+const updateGame = function(index, currentPlayer, over) {
   return $.ajax({
     url: config.apiOrigin + '/games' + store.game.id,
     method: 'PATCH',
@@ -72,7 +72,7 @@ const updateGame = function(index, currentPlayer, status) {
           index: index,
           value: currentPlayer,
         },
-        over: status,
+        over: over,
       }
     },
   });

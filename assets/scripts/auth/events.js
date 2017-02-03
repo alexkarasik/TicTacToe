@@ -23,7 +23,7 @@ const onSignIn = function (event) {
     store.user = response.user;
     return store.user;
   })
- .then(ui.success)
+ .then(ui.signInSuccess)
  .catch(ui.failure);
 };
 
@@ -32,7 +32,7 @@ const onSignOut = function (event) {
   event.preventDefault();
   let data = getFormFields(event.target);
   api.signOut(data)
- .then(ui.success)
+ .then(ui.signOutSuccess)
  .catch(ui.failure);
 };
 
@@ -63,7 +63,7 @@ const onCreateGames = function (event) {
       store.game = response.game;
       return store.game;
     })
- .then(ui.success)
+ .then(ui.createGameSuccess)
  .catch(ui.failure);
  engine.resetGameBoard();
 };
@@ -75,17 +75,6 @@ const addHandlers = () => {
   $('#change-password').on('submit', onChangePassword);
   $('#previous-games').on('click', onShowGames);
   $('#play-again-button').on('click', onCreateGames);
-  $('.square').on('click', (event) => {
-    let currentSquare = parseInt(event.target.id);
-    let moveSuccess =  engine.switchTurn(currentSquare);
-     $(event.target).text(moveSuccess);
-    let status = engine.possibleWins;
-    api.updateGame(currentSquare, moveSuccess, status);
-  });
-
-
-
-
 };
 module.exports = {
   addHandlers,
