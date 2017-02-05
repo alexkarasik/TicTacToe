@@ -42,12 +42,11 @@ const signOutSuccess = () => {
 const createGameSuccess = () => {
   $('#newGame').removeClass('hidden');
   $('.games-played').hide();
-  // if (data) {
-  //   console.log(data);
-  // }
+
 };
 const showGameSuccess = (data) => {
   $('.games-played').show();
+  //when a games played button is clicked, we want it to display the data of the number of games played in a message
   $('.games-played').text('You\'ve played ' + data.games.length + ' times!');
   // if (data) {
   //   console.log(data);

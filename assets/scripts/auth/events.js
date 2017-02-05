@@ -1,11 +1,14 @@
 'use strict';
+//the events will be in use in all of the following files, including the form fields and store, where the data will be stored
 const api = require('./api');
 const ui = require('./ui');
 const getFormFields = require('../../../lib/get-form-fields.js');
 const store = require('../store');
 const engine = require('../new');
 
-
+//We are creating the events that go into our click handlers.
+//I needed help to understand what was going on here, but after the first succesffuly created event, the rest became more intuitive.
+//The event is the argument being taken in by my event handlers. preventDefault stops any previous event from occuring, which is necessary for our event to work. We are getting our data from the information that the user enters into the sign up form field. We use the sign up function created in the API to pass that data onto the game. We have the conditions accounted for a success or failure, coming from out ui file. We are adding a few event handlers to these as well to make some of the requirements work, such as displaying the number of games won on the success of an onGameSuccess event.
 const onSignUp = function (event) {
   event.preventDefault();
   let data = getFormFields(event.target);
@@ -21,6 +24,9 @@ const onSignIn = function (event) {
   api.signIn(data)
   .then((response) => {
     store.user = response.user;
+    $(".after-signin").show();
+    $(".after-signin2").hide();
+
     return store.user;
   })
  .then(ui.signInSuccess)
@@ -32,6 +38,10 @@ const onSignOut = function (event) {
   event.preventDefault();
   let data = getFormFields(event.target);
   api.signOut(data)
+  .then((response) => {
+    $(".after-signin").hide();
+    $(".after-signin2").show();
+  })
  .then(ui.signOutSuccess)
  .catch(ui.failure);
 };
@@ -41,6 +51,9 @@ const onChangePassword = function (event) {
   event.preventDefault();
   let data = getFormFields(event.target);
   api.changePassword(data)
+  .then(function (response) {
+     $('.message').text("password changed")
+  })
  .then(ui.success)
  .catch(ui.failure);
 };
