@@ -19,7 +19,7 @@ const resetGameBoard = function () {
     over = false;
     $('#' + i).text('');
     $('.message').text('');
-  }
+  } currentPlayer = player1;
 };
 
 //2. Me and the group I was working with realized that we needed to come up with all the winning combinations of the game. I know where are a few more code efficient ways of doing this, but I also think it is the simplest and that is my interpretation of best practice. There is a message div in my HTML I included after making the skeleton on this to display the winner. We want to return true after each possible combination of a successfully completed game has occurred.
