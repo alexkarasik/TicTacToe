@@ -12,24 +12,24 @@ const failure = (error) => {
 // $('#sign-in');
 
 const signInSuccess = () => {
-  // $('#sign-up').val('');
-  $('.email-sign-in').val('');
-  // $('#sign-up').hide();
-  // $('#sign-in').hide();
-  // $('#new-game').show();
-  // $('#game-log').show();
-  // $('#change-password').show();
-  // $('#sign-out').show();
-  // $('#board').show();
-  // if (data) {
-  //   console.log(data);
-  // }
+   $('#sign-up').val('');
+   $('.email-sign-in').val('');
+   $('#sign-up').hide();
+   $('#sign-in').hide();
+   $('#new-game').show();
+   $('#game-log').show();
+   $('#change-password').show();
+   $('#sign-out').show();
+   $('#board').show();
+   if (data) {
+     console.log(data);
+   }
 };
 const signOutSuccess = () => {
   // $('#sign-out').hide();
   // $('#change-password').hide();
-  // $('#new-game').hide();
-  // $('#game-log').hide();
+   $('#new-game').hide();
+   $('#game-log').hide();
   // $('#board').hide();
   // $('.games-played').hide().val('');
   // $('#sign-in').show();

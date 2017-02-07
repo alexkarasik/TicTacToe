@@ -58,8 +58,9 @@ let possibleWins = function () {
 const switchTurn = function (index) {
   if (board[index] === '') {
     board[index] = currentPlayer;
-    //this next line still confuses me sometimes and I want to make sure my understanding is solid.
+    // The status of our game is equal to the result of our possibleWins function. We are checking for a winner after each move to see if we have a match of any of the winning possibilities
     over = possibleWins();
+  //After each move, we also want to be updating the info taken in by out API, so we include the updateGame function we used there to update the information we have just taken in, concerning which index/id has been used, which currentPlayer used it and if the status of the game is over or not.
     api.updateGame(index, currentPlayer, over);
     if (currentPlayer === player1) {
       currentPlayer = player2;
@@ -73,6 +74,7 @@ const switchTurn = function (index) {
 //4. This was an event handler that moved around a lot between the engine here and the events.js file. I am still a bit unfamiliar with the rocket syntax, so I wanted to make a point to use it. Whenever a user clicks on a square, the text of current player, which is x or o, will appear in that target of the event. The switch turn function is then applied to the id value of the divs in our table, which were given div values with string id's and converted to numbers with parseInt. I got a lot of help with this part. It is pretty obvious that we want an x or o to appear in the boxes, but using event.target was a concept i struggled with as well as applying parseInt to get the indexes as converted string values.
   $('.square').on('click', (event) => {
     $(event.target).text(currentPlayer);
+//Just to be extra clear, event.target.id refers to the element that triggered the event
     switchTurn(parseInt(event.target.id));
   });
 
