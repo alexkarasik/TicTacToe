@@ -1,330 +1,87 @@
 'use strict';
-const board = ['', '', '', '', '', '', '', '', ''];
-let currentPlayer = 'X';
-// let player1 = 'X';
-// let player2 = 'O';
-let newGame = $('#reset');
+//1. I am going to fill up my code with comments, so I can explain everything I have done back to myself and hone in on what I need to get a better understanding of. I am numbering my comments in the order of approaching this to best understand my own thoguht process and how I can improve in the future.
+//I started off with my engine as suggested and making some of the global variables I knew I would be needing, while keeping in mind the user stories that would make up my main function. I knew I would be switching a variable current player back and forth between x and o, so I set a current player to x to start off with. I also have an 'over' variable, which will be set to a boolean and determining whether or not the game is still going on or not. I also have an array of empty strings, representing my board, which is where the x's and o's will be inserted into and represented in the ui by the div table.
 
-const resetGameBoard = function() {
+//5. we are using the API in the switchTurn function to update the game to know whether or not it woud be appropriate for that function to continue running, so we include it here at the top as a requirement
+const api = require('./auth/api');
+
+
+let currentPlayer = 'X';
+let player1 = 'X';
+let player2 = 'O';
+let over = false;
+const board = ['', '', '', '', '', '', '', '', ''];
+
+//7. This fucntion gave me the most trouble and sent me down a rabbit hole last Sunday. This function is setting up a new and empty board. We want a blank board, blank array, blank messages and a live game. This function loops through every iteration of the array and clears everything out. Now it seems fairly straight-forward.
+const resetGameBoard = function () {
   for (let i = 0; i < board.length; i++) {
     board[i] = '';
-    $('.box').text('');
-    //$('.win').text('');
-    currentPlayer = 'X';
+    over = false;
+    $('#' + i).text('');
+    $('.message').text('');
   }
 };
 
-let endGame = function() {
-  $('.box').off('click');
-};
+//2. Me and the group I was working with realized that we needed to come up with all the winning combinations of the game. I know where are a few more code efficient ways of doing this, but I also think it is the simplest and that is my interpretation of best practice. There is a message div in my HTML I included after making the skeleton on this to display the winner. We want to return true after each possible combination of a successfully completed game has occurred.
 
-const checkWins = function() {
-  if (
-    board[0] === "X" && board[1] === "X" && board[2] === "X" ||
-    board[3] === "X" && board[4] === "X" && board[5] === "X" ||
-    board[6] === "X" && board[7] === "X" && board[8] === "X" ||
-    board[0] === "X" && board[4] === "X" && board[8] === "X" ||
-    board[2] === "X" && board[4] === "X" && board[6] === "X" ||
-    board[0] === "X" && board[3] === "X" && board[6] === "X" ||
-    board[1] === "X" && board[4] === "X" && board[7] === "X" ||
-    board[2] === "X" && board[5] === "X" && board[8] === "X"
-  ) {
-    //$('.win').text("X won!");
-    console.log('X won');
-    endGame();
-  } else if (
-    board[0] === "O" && board[1] === "O" && board[2] === "O" ||
-    board[3] === "O" && board[4] === "O" && board[5] === "O" ||
-    board[6] === "O" && board[7] === "O" && board[8] === "O" ||
-    board[0] === "O" && board[4] === "O" && board[8] === "O" ||
-    board[2] === "O" && board[4] === "O" && board[6] === "O" ||
-    board[0] === "O" && board[3] === "O" && board[6] === "O" ||
-    board[1] === "O" && board[4] === "O" && board[7] === "O" ||
-    board[2] === "O" && board[5] === "O" && board[8] === "O"
-  ) {
-    //$('.win').text("O won!");
-    console.log('O won');
-    endGame();
-  } else if (board.includes('') === false) {
-    $('.win').text("DRAW");
-    console.log('DRAW');
-    endGame();
+let possibleWins = function () {
+  if ((board[0] === 'X' && board[1] === 'X' && board[2] === 'X') ||
+      (board[3] === 'X' && board[4] === 'X' && board[5] === 'X') ||
+      (board[6] === 'X' && board[7] === 'X' && board[8] === 'X') ||
+      (board[0] === 'X' && board[3] === 'X' && board[6] === 'X') ||
+      (board[1] === 'X' && board[4] === 'X' && board[7] === 'X') ||
+      (board[2] === 'X' && board[5] === 'X' && board[8] === 'X') ||
+      (board[0] === 'X' && board[4] === 'X' && board[8] === 'X') ||
+      (board[2] === 'X' && board[4] === 'X' && board[6] === 'X')) {
+    $('.message').text('X wins!');
+    return true;
+
+  } else if ((board[0] === 'O' && board[1] === 'O' && board[2] === 'O') ||
+      (board[3] === 'O' && board[4] === 'O' && board[5] === 'O') ||
+      (board[6] === 'O' && board[7] === 'O' && board[8] === 'O') ||
+      (board[0] === 'O' && board[3] === 'O' && board[6] === 'O') ||
+      (board[1] === 'O' && board[4] === 'O' && board[7] === 'O') ||
+      (board[2] === 'O' && board[5] === 'O' && board[8] === 'O') ||
+      (board[0] === 'O' && board[4] === 'O' && board[8] === 'O') ||
+      (board[2] === 'O' && board[4] === 'O' && board[6] === 'O')) {
+    $('.message').text('O wins!');
+    return true;
+  } else if (board.includes('') === false){
+
+        $('.message').text('DRAW!!!');
+        return true;
   }
 };
 
-let flipPlayer = function(index) {
+//3. This was the second main function we spent a bit of time on in the engine and my commit history will show a number of changes to this function. I will explain what is happening in pseudo-code. Our function is taking in an index for the argument. If an index space on our board array is empty, then we are going to place our current player value, 'X' in it to begin with. the over global variable which is set to false, will be tested against the possible wins function, so it should noe return true. We include the updateGame function that was created in the api that takes in the index, current player and whehter of not the game is over and paramters and updates the status of the game to the server. The rest of the function is switching x and o from each other.
+
+const switchTurn = function (index) {
   if (board[index] === '') {
     board[index] = currentPlayer;
-    checkWins();
-    if (currentPlayer === "X") {
-      currentPlayer = "O";
-      // checkWins();
-    } else {
-      currentPlayer = "X";
-      // checkWins();
+    // The status of our game is equal to the result of our possibleWins function. We are checking for a winner after each move to see if we have a match of any of the winning possibilities
+    over = possibleWins();
+  //After each move, we also want to be updating the info taken in by out API, so we include the updateGame function we used there to update the information we have just taken in, concerning which index/id has been used, which currentPlayer used it and if the status of the game is over or not.
+    api.updateGame(index, currentPlayer, over);
+    if (currentPlayer === player1) {
+      currentPlayer = player2;
+    } else if (currentPlayer === player2) {
+      currentPlayer = player1;
     }
-  } else {
-    console.log("pick another place");
-    //$('.win').text("pick another place");
   }
+
 };
 
-let boxes = $('.box');
-
-boxes.on('click', function(event) {
-  if ($(event.target).text() === '') {
+//4. This was an event handler that moved around a lot between the engine here and the events.js file. I am still a bit unfamiliar with the rocket syntax, so I wanted to make a point to use it. Whenever a user clicks on a square, the text of current player, which is x or o, will appear in that target of the event. The switch turn function is then applied to the id value of the divs in our table, which were given div values with string id's and converted to numbers with parseInt. I got a lot of help with this part. It is pretty obvious that we want an x or o to appear in the boxes, but using event.target was a concept i struggled with as well as applying parseInt to get the indexes as converted string values.
+  $('.square').on('click', (event) => {
     $(event.target).text(currentPlayer);
-    // $(this).addClass(player1);
-    // changeTurn();
-  }
-  let conversion = parseInt(event.target.id);
-  flipPlayer(conversion);
-  console.log(board);
-});
+//Just to be extra clear, event.target.id refers to the element that triggered the event
+    switchTurn(parseInt(event.target.id));
+  });
 
-newGame.on('click', function() {
-  resetGameBoard();
-});
-
-
-// let count = 0;
-
-// let changeTurn = function() {
-//   if(currentPlayer === 'X'){
-//     currentPlayer = 'O';
-//   }else {
-//     currentPlayer = 'X';
-//   }
-// };
-// let $dude =$('#dude');
-
-
-// $('#').on('click', function(){
-//   if($('#').text()===''){
-//     $('#').text(player1 || player2);
-//   }
-// });
-// $('#side').on('click', function(){
-//   const $cell = $('#' + this.id);
-//     const indx = parseInt($cell.attr('id').slice(1));
-//       $('#${indx}').html('X');
-// })
-// const gameShow =
-//   $('#side1').on('click', function(){
-//     alert('1');
-//   });
+//6. we must write module.exports to make the functions created in this file available throughout the program. Forgetting this was the cause of a few errors along the way in this and other files.
 module.exports = {
-  checkWins,
-  board,
+    switchTurn,
+   possibleWins,
   resetGameBoard,
-  flipPlayer,
-  endGame,
-  newGame
+
 };
-// 'use strict';
-//
-//
-// const board = ["", "", "", "", "", "", "", "", ""];
-//
-// let currentPlayer = "X";
-//
-// let newGame = $('#reset');
-// const resetGameBoard = function() {
-//   for (let i = 0; i < board.length; i++) {
-//     board[i] = '';
-//     $('.box').text('');
-//     $('.win').text('');
-//     currentPlayer = 'X';
-//   }
-//   boxes.on('click', function(event) {
-//     if ($(event.target).text() === '') {
-//       $(event.target).text(currentPlayer);
-//       // $(this).addClass(player1);
-//       // changeTurn();
-//     }
-//     turns(event.target.id);
-//     console.log(board);
-//   });
-// };
-//
-// newGame.on('click', function() {
-//   resetGameBoard();
-// });
-//
-//
-// const resetGameBoard = function(){
-//   for(let i = 0; i < board.length; i++){
-//     board[i] = '';
-//     // $('.box').text('');
-//   }
-// };
-//
-// // newGame.on('click', function(){
-// //   resetGameBoard();
-// // });
-//
-// const checkWins = function(){
-//   if(
-//       board[0] === 'X' && board[1] === 'X' && board[2] === 'X' ||
-//       board[3] === 'X' && board[4] === 'X' && board[5] === 'X' ||
-//       board[6] === 'X' && board[7] === 'X' && board[8] === 'X' ||
-//       board[0] === 'X' && board[4] === 'X' && board[8] === 'X' ||
-//       board[2] === 'X' && board[4] === 'X' && board[6] === 'X' ||
-//       board[0] === 'X' && board[3] === 'X' && board[6] === 'X' ||
-//       board[1] === 'X' && board[4] === 'X' && board[7] === 'X' ||
-//       board[2] === 'X' && board[5] === 'X' && board[8] === 'X'
-//     ) {
-//       // $('win').text=("X wins!");
-//       console.log('X won');
-//       // endGame();
-//     }
-//   else if(
-//     board[0] === 'O' && board[1] === 'O' && board[2] === 'O' ||
-//     board[3] === 'O' && board[4] === 'O' && board[5] === 'O' ||
-//     board[6] === 'O' && board[7] === 'O' && board[8] === 'O' ||
-//     board[0] === 'O' && board[4] === 'O' && board[8] === 'O' ||
-//     board[2] === 'O' && board[4] === 'O' && board[6] === 'O' ||
-//     board[0] === 'O' && board[3] === 'O' && board[6] === 'O' ||
-//     board[1] === 'O' && board[4] === 'O' && board[7] === 'O' ||
-//     board[2] === 'O' && board[5] === 'O' && board[8] === 'O'
-//   ){    {
-//       // $('win').text=("O wins!");
-//       console.log('O won');
-//       // endGame();
-//     }
-//   } else if(board.includes('')===false) {
-//
-//     // $('win').text=("Tie");
-//     console.log("TIE!");
-//     // endGame();
-//
-//   }
-//   };
-//
-// //
-// // const gameStatus = function(){
-// //   return board.includes("");
-// //
-// // };
-// //
-// // const addMove = function(index){
-// //   if(!board[index]){
-// //     board[index] = currentPlayer;
-// //     if(currentPlayer===player1){
-// //       currentPlayer=player2;
-// //     } else {
-// //       currentPlayer=player1
-// //     }
-// //   }else{
-// //     console.log("pick another place");
-// //   }
-// // }
-//
-// //
-// // let player1 = 'X';
-// // let player2 = 'O';
-//
-// const flipPlayer = function(index){
-//   if(board[index] === ''){
-//    board[index]= currentPlayer;
-//    checkWins();
-//    if(currentPlayer === "X"){
-//      currentPlayer = "O";
-//    } else {
-//      currentPlayer = "X";
-//    }
-//  } else {
-//    console.log("pick another place!");
-//  }
-//
-//
-//  let boxes = $('.box');
-// boxes.on('click', function(event) {
-//   if ($(event.target).text() === '') {
-//     $(event.target).text(currentPlayer);
-//     // $(this).addClass(player1);
-//     // changeTurn();
-//   }
-//   turns(event.target.id);
-//   console.log(board);
-// });
-//
-//
-// //     board[index]="x";
-// //     currentPlayer="o";
-// //     checkWins();
-// //  } else if (currentPlayer === "o"){
-// //    board[index] = currentPlayer;
-// //    currentPlayer= "x";
-// //    checkWins();
-// //  } else {
-// //     console.log("pick another place");
-// // }
-//
-//
-//
-// // let endGame = function(){
-// //   $('.box').off('click');
-// // };
-//
-// // let boxes = $('.cell')
-//
-//
-// // boxes.on('click', function(event){
-// //   if($(event.target).text() === ''){
-// //     $(event.target).text(currentPlayer);
-// //   }
-// //   let conversion = parseInt(event.target.id);
-// //   turns(conversion);
-// //   //we are
-// //   console.log(board);
-// // })
-// //
-//
-//
-//
-//
-//
-// //let boxes = $('.box');
-//
-//
-// //let boxes =
-// // boxes.on('click', function(event){
-// //   if($(this).text()=== ''){
-// //     $(event.target).text(currentPlayer);
-// //   }
-// //     turns(event.target.id);
-// // })
-//
-//
-//
-//
-// // $('#').on('click', function(){
-// //   if($('#').text() === ''){
-// //     $('#').text(marker);
-// //   }else{
-// //     console.log('error');
-// //   }
-// //   }
-// // );
-//
-//
-//
-//
-// module.exports = {
-//   board,
-//   resetGameBoard,
-//   checkWins,
-//   flipPlayer,
-//   endGame,
-// };
-//
-//
-//
-//
-//
-// // const switch = function(){
-// //   if(turns = 0){
-// //
-// //   }
-// // };

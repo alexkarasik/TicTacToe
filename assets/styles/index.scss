@@ -2,129 +2,68 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 @import url('https://fonts.googleapis.com/css?family=Lobster');
 
-
-
-html {
-  overflow: hidden;
+.board {
+  align-content: center;
+  align-items: center;
+  display: center;
+  height: 300px;
+  justify-content: center;
+  margin: auto;
 }
-
-body {
- background-color: #544f4a;
+h1{
+  text-align: center;
+  font-family: 'Lobster', cursive;
+  color: red;
 }
-
-.container {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+h3{
+  text-align: center;
+  font-family: 'Lobster', cursive;
+  color: red;
 }
-
-.clearfix:after {
-  content: "";
-  display: table;
-  clear: both;
+header {
+  color: red;
+  font-family: fantasy;
+  font-weight: bold;
+  text-align: center;
 }
-
+.message {
+  color: red;
+  font-size: 100px;
+  font-weight: bold;
+  text-align: center;
+}
 
 p {
-  font-weight: 400;
-}
-
-h3 {
-  font-weight: 700;
-  text-transform: uppercase;
-  margin: 0 0 10px 0;
-}
-
-.board {
-  position: relative;
-  width: 22em;
-  font-family: sans-serif;
-  font-weight: 700;
-  margin: 0 auto;
+  color: black;
+  font-size: 90px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .row {
-  float: left;
+  display: flex;
+  height: 200px;
+  margin: auto;
+  text-align: center;
+  width: 500px;
 }
-
-.row:first-child .square {
-  border-top: 0;
-}
-
 .square {
-  color: #605B56 ;
-  border-color: #605B56;
-  font-size: 6em;
-  width: 1.2em;
-  height: 1.2em;
-  line-height: 1.2em;
-  float: left;
-  border-style: solid;
-  border-width: 1px 1px 0 0;
+  border: 3px solid black;
+  display: flex;
+  flex-basis: 33%;
+  font-size: 155px;
+  font-weight: bold;
   text-align: center;
-  cursor: default;
 }
-
-.square:last-child {
-  border-right: 0px;
-}
-
-.x-marker {
-  color: #eeda76;
-}
-
-.o-marker {
-  color: #39abd9;
-}
-
-
-.modal-container{
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 70%;
-  display: none;
-}
-
-.modal {
-  font-family: Raleway;
-  text-align: center;
-  background-color: hsla(30, 12%, 23%, 0.95);
-  color: white;
-  font-size: 1em;
-  height: 100%;
-  padding: 30px;
-}
-
-.end-game-modal {
-  display: none;
-}
-
-.choose-modal span{
-  line-height: 1.5em;
-  width: 1.5em;
-  height: 1.5em;
-  font-size: 3em;
-}
-
-.end-game-modal span {
-  color: #eeda76;
-  text-transform: uppercase;
-  line-height: 1.5em;
-  font-size: 1.3em;
-  padding: 0.2em 0.4em;
-}
-
-
-.button-area span {
-  display: inline-block;
-  background-color: hsla(30, 10%, 20%, 0.95);
-  margin: 0.2em 0.2em 0 0.2em;
-}
-
-.button-area span:hover {
+.square:hover {
+  color: red;
   cursor: pointer;
-  background-color: hsla(30, 10%, 30%, 0.95);
+}
+.wrapper {
+  min-height: 100%;
+  position: relative;
+}
+//change password
+.after-signin{
+  display: none;
 }

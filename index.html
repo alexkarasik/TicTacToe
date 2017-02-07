@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Example</title>
+  <title>Tic Tac ToE BY Alex K</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Do not add `link` tags unless you know what you are doing -->
@@ -19,101 +19,173 @@
 
 
   <h1>Tic Tac Toe</h1>
-  <form id="sign-up">
-    <fieldset>
-      <legend>Sign up!</legend>
-      <label>
-                  Email
-                  <input type="text" name="credentials[email]">
-                </label>
-      <label>
-                  Password
-                  <input type="password" name="credentials[password]">
-                </label>
-      <label>
-                  Password Confirmation
-                  <input type="password" name="credentials[password_confirmation]">
-                </label>
-      <input type="submit" name="submit" value="Sign up!">
-    </fieldset>
-  </form>
-
-  <form id="sign-in">
-    <fieldset>
-      <legend>Sign in!</legend>
-      <label>
-                      Email
-                      <input type="text" name="credentials[email]">
-                    </label>
-      <label>
-                      Password
-                      <input type="password" name="credentials[password]">
-                    </label>
-      <input type="submit" name="submit" value="Sign in!">
-    </fieldset>
-  </form>
-
-  <form id="change-password">
-    <fieldset>
-      <legend>Change Password!</legend>
-      <label>
-            Current Password
-            <input type="password" name="passwords[old]">
-          </label>
-      <label>
-            New Password
-            <input type="password" name="passwords[new]">
-          </label>
-
-      <input type="submit" name="submit" value="Change Password!">
-    </fieldset>
-  </form>
+  <h3>By Alex Karasik</h3>
 
 
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary after-signin2" data-toggle="modal" data-target="#myModal">
+    Sign Up!
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Sign-Up</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="sign-up" >
+            <fieldset>
+
+              <label>
+                          Email
+                          <input type="text" name="credentials[email]">
+                        </label>
+              <label>
+                          Password
+                          <input type="password" name="credentials[password]">
+                        </label>
+              <label>
+                          Password Confirmation
+                          <input type="password" name="credentials[password_confirmation]">
+                        </label>
+              <input type="submit" name="submit" value="Sign up!">
+            </fieldset>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary after-signin2" data-toggle="modal" data-target="#myModal2">
+    Sign in!
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Sign in!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="sign-in">
+            <fieldset>
+              <label>
+                              Email
+                              <input class="email-sign-in" type="text" name="credentials[email]">
+                            </label>
+              <label>
+                              Password
+                              <input class="email-sign-in" type="password" name="credentials[password]">
+                            </label>
+              <input type="submit" name="submit" value="Sign in!">
+            </fieldset>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal3">
+    Password
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="change-password" class="after-signin">
+            <fieldset>
+              <legend>Change Password!</legend>
+              <label>
+                    Current Password
+                    <input type="password" name="passwords[old]">
+                  </label>
+              <label>
+                    New Password
+                    <input type="password" name="passwords[new]">
+                  </label>
+
+              <input type="submit" name="submit" value="Change Password!">
+
+            </fieldset>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="after-signin">
   <form id="sign-out">
     <fieldset>
     <legend>Sign Out!</legend>
-      <input type="submit" name="submit" value="Sign Out!">
+      <input type="submit" name="submit" value="Sign Out!" >
     </fieldset>
   </form>
 
 
 
-  <form id="reset">
-    <fieldset>
-      <legend>Reset</legend>
-      <input type="submit" name="submit" value="reset">
-          </fieldset>
-  </form>
 
-  <form id="showHistory">
-    <fieldset>
-      <legend>Show History</legend>
-      <input type="submit" name="submit" value="showHistory">
-          </fieldset>
-  </form>
+
+      <button id="play-again-button">New Game</button>
+
+
+
+      <button id="previous-games">Show History</button>
+
+</div>
 
 
 
 
 
+<div class="message"></div>
 
-  <div id="board">
+  <div class="board hidden" id="newGame">
 
     <div class="row">
-      <div class="cell box" id="0"></div>
-      <div class="cell box" id="1"></div>
-      <div class="cell box" id="2"></div>
+      <div class="square" id="0"></div>
+      <div class="square" id="1"></div>
+      <div class="square" id="2"></div>
     </div>
     <div class="row">
-      <div class="cell box" id="3"></div>
-      <div class="cell box" id="4"></div>
-      <div class="cell box" id="5"></div>
+      <div class="square" id="3"></div>
+      <div class="square" id="4"></div>
+      <div class="square" id="5"></div>
     </div>
     <div class="row">
-      <div class="cell box" id="6"></div>
-      <div class="cell box" id="7"></div>
-      <div class="cell box" id="8"></div>
+      <div class="square" id="6"></div>
+      <div class="square" id="7"></div>
+      <div class="square" id="8"></div>
     </div>
 
   </div>
