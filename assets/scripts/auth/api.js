@@ -69,7 +69,7 @@ const createGames = function (data) {
 //This was the API function I struggled with the most. We are getting into the token of the id of the user and changing the current player, index and status on each turn. I don't want to overthink this too much, but we had to think of what paramters are being updated. The currentPlayer, status of the game and where the move is going are the things that get changed. The index and currentplayer are pieces of information contained with the individual cells that make up the game, which is information stored in the data.
 const updateGame = function(index, currentPlayer, over) {
   return $.ajax({
-    url: config.apiOrigin + '/games' + store.game.id,
+    url: config.apiOrigin + '/games/' + store.game.id,
     method: 'PATCH',
     headers: {
       Authorization: `Token token=${store.user.token}`

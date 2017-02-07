@@ -23,126 +23,55 @@
 
 
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary after-signin2" data-toggle="modal" data-target="#myModal">
-    Sign Up!
-  </button>
+  <form id="sign-up">
+          <fieldset>
+            <legend>Sign up!</legend>
+            <label>
+              Email
+              <input type="text" name="credentials[email]">
+            </label>
+            <label>
+              Password
+              <input type="password" name="credentials[password]">
+            </label>
+            <label>
+              Password Confirmation
+              <input type="password" name="credentials[password_confirmation]">
+            </label>
+            <input type="submit" name="submit" value="Sign up!">
+          </fieldset>
+        </form>
 
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Sign-Up</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="sign-up" >
-            <fieldset>
+        <form id="sign-in">
+          <fieldset>
+            <legend>Sign in!</legend>
+            <label>
+              Email
+              <input type="text" name="credentials[email]">
+            </label>
+            <label>
+              Password
+              <input type="password" name="credentials[password]">
+            </label>
+            <input type="submit" name="submit" value="Sign in!">
+          </fieldset>
+        </form>
 
-              <label>
-                          Email
-                          <input type="text" name="credentials[email]">
-                        </label>
-              <label>
-                          Password
-                          <input type="password" name="credentials[password]">
-                        </label>
-              <label>
-                          Password Confirmation
-                          <input type="password" name="credentials[password_confirmation]">
-                        </label>
-              <input type="submit" name="submit" value="Sign up!">
-            </fieldset>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
+        <form id="change-password">
+          <fieldset>
+            <legend>Change Password!</legend>
+            <label>
+              Current Password
+              <input type="password" name="passwords[old]">
+            </label>
+            <label>
+              New Password
+              <input type="password" name="passwords[new]">
+            </label>
 
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary after-signin2" data-toggle="modal" data-target="#myModal2">
-    Sign in!
-  </button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Sign in!</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="sign-in">
-            <fieldset>
-              <label>
-                              Email
-                              <input class="email-sign-in" type="text" name="credentials[email]">
-                            </label>
-              <label>
-                              Password
-                              <input class="email-sign-in" type="password" name="credentials[password]">
-                            </label>
-              <input type="submit" name="submit" value="Sign in!">
-            </fieldset>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal3">
-    Password
-  </button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="change-password" class="after-signin">
-            <fieldset>
-              <legend>Change Password!</legend>
-              <label>
-                    Current Password
-                    <input type="password" name="passwords[old]">
-                  </label>
-              <label>
-                    New Password
-                    <input type="password" name="passwords[new]">
-                  </label>
-
-              <input type="submit" name="submit" value="Change Password!">
-
-            </fieldset>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
+            <input type="submit" name="submit" value="Change Password!">
+          </fieldset>
+      </form>
 
 <div class="after-signin">
   <form id="sign-out">
@@ -168,27 +97,27 @@
 
 
 
-<div class="message"></div>
+<h2 class='message'></h2>
 
-  <div class="board hidden" id="newGame">
+<div class="board" id="newGame">
 
-    <div class="row">
-      <div class="square" id="0"></div>
-      <div class="square" id="1"></div>
-      <div class="square" id="2"></div>
-    </div>
-    <div class="row">
-      <div class="square" id="3"></div>
-      <div class="square" id="4"></div>
-      <div class="square" id="5"></div>
-    </div>
-    <div class="row">
-      <div class="square" id="6"></div>
-      <div class="square" id="7"></div>
-      <div class="square" id="8"></div>
-    </div>
-
+  <div class="row">
+    <div class="square" id="0"></div>
+    <div class="square" id="1"></div>
+    <div class="square" id="2"></div>
   </div>
+  <div class="row">
+    <div class="square" id="3"></div>
+    <div class="square" id="4"></div>
+    <div class="square" id="5"></div>
+  </div>
+  <div class="row">
+    <div class="square" id="6"></div>
+    <div class="square" id="7"></div>
+    <div class="square" id="8"></div>
+  </div>
+
+</div>
 
 </body>
 

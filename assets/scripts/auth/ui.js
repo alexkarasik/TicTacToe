@@ -8,41 +8,39 @@ const failure = (error) => {
   console.error(error);
 };
 
-// const signinSuccess= (data) =>
-// $('#sign-in');
+const signUpSuccess = (data) => {
+  $('#sign-up').hide();
+  if (data) {
+    console.log(data);
+  }
+};
 
-const signInSuccess = () => {
+const signInSuccess = (data) => {
    $('#sign-up').val('');
-   $('.email-sign-in').val('');
    $('#sign-up').hide();
    $('#sign-in').hide();
-   $('#new-game').show();
-   $('#game-log').show();
    $('#change-password').show();
-   $('#sign-out').show();
-   $('#board').show();
+   $('.after-signin').show();
+
    if (data) {
      console.log(data);
    }
 };
 const signOutSuccess = () => {
-  // $('#sign-out').hide();
-  // $('#change-password').hide();
-   $('#new-game').hide();
-   $('#game-log').hide();
-  // $('#board').hide();
+  $('.after-signin').hide();
+  $('#change-password').hide();
+  $('.board').hide();
+  $('.message').hide();
   // $('.games-played').hide().val('');
-  // $('#sign-in').show();
-  // $('#sign-up').show();
-  $('#newGame').addClass('hidden');
+  $('#sign-in').show();
+  $('#sign-up').show();
   // if (data) {
   //   console.log(data);
   // }
 };
 const createGameSuccess = () => {
-  $('#newGame').removeClass('hidden');
-  $('.games-played').hide();
-
+  $('.message').show();
+  $('#newGame').show();
 };
 const showGameSuccess = (data) => {
   $('.games-played').show();
@@ -56,6 +54,7 @@ const showGameSuccess = (data) => {
 module.exports = {
   failure,
   success,
+  signUpSuccess,
   signInSuccess,
   createGameSuccess,
   signOutSuccess,

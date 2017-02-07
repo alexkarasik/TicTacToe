@@ -34,7 +34,7 @@ let possibleWins = function () {
       (board[0] === 'X' && board[4] === 'X' && board[8] === 'X') ||
       (board[2] === 'X' && board[4] === 'X' && board[6] === 'X')) {
     $('.message').text('X wins!');
-    return true;
+    over =  true;
 
   } else if ((board[0] === 'O' && board[1] === 'O' && board[2] === 'O') ||
       (board[3] === 'O' && board[4] === 'O' && board[5] === 'O') ||
@@ -45,11 +45,11 @@ let possibleWins = function () {
       (board[0] === 'O' && board[4] === 'O' && board[8] === 'O') ||
       (board[2] === 'O' && board[4] === 'O' && board[6] === 'O')) {
     $('.message').text('O wins!');
-    return true;
+    over = true;
   } else if (board.includes('') === false){
 
         $('.message').text('DRAW!!!');
-        return true;
+        over = true;
   }
 };
 
@@ -73,7 +73,9 @@ const switchTurn = function (index) {
 
 //4. This was an event handler that moved around a lot between the engine here and the events.js file. I am still a bit unfamiliar with the rocket syntax, so I wanted to make a point to use it. Whenever a user clicks on a square, the text of current player, which is x or o, will appear in that target of the event. The switch turn function is then applied to the id value of the divs in our table, which were given div values with string id's and converted to numbers with parseInt. I got a lot of help with this part. It is pretty obvious that we want an x or o to appear in the boxes, but using event.target was a concept i struggled with as well as applying parseInt to get the indexes as converted string values.
   $('.square').on('click', (event) => {
-    $(event.target).text(currentPlayer);
+    if ($(event.target).text() === '') {
+      $(event.target).text(currentPlayer);
+    }
 //Just to be extra clear, event.target.id refers to the element that triggered the event
     switchTurn(parseInt(event.target.id));
   });

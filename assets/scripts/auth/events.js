@@ -13,7 +13,7 @@ const onSignUp = function (event) {
   event.preventDefault();
   let data = getFormFields(event.target);
   api.signUp(data)
- .then(ui.success)
+ .then(ui.signUpSuccess)
  .catch(ui.failure);
 };
 
@@ -24,9 +24,6 @@ const onSignIn = function (event) {
   api.signIn(data)
   .then((response) => {
     store.user = response.user;
-    $(".after-signin").show();
-    $(".after-signin2").hide();
-
     return store.user;
   })
  .then(ui.signInSuccess)
@@ -38,10 +35,6 @@ const onSignOut = function (event) {
   event.preventDefault();
   let data = getFormFields(event.target);
   api.signOut(data)
-  .then((response) => {
-    $(".after-signin").hide();
-    $(".after-signin2").show();
-  })
  .then(ui.signOutSuccess)
  .catch(ui.failure);
 };
@@ -52,8 +45,6 @@ const onChangePassword = function (event) {
   let data = getFormFields(event.target);
   api.changePassword(data)
   .then(function (response) {
-    $(".after-signin").show();
-    $(".after-signin2").hide();
     $('.message').text("password changed")
   })
  .then(ui.success)
@@ -84,6 +75,9 @@ const onCreateGames = function (event) {
 };
 
 const addHandlers = () => {
+  $('#change-password').hide();
+  $('.after-signin').hide();
+  $('.board').hide();
   $('#sign-up').on('submit', onSignUp);
   $('#sign-in').on('submit', onSignIn);
   $('#sign-out').on('submit', onSignOut);
