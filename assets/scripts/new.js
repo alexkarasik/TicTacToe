@@ -19,7 +19,12 @@ const resetGameBoard = function () {
     over = false;
     $('#' + i).text('');
     $('.message').text('');
-  } currentPlayer = player1;
+    currentPlayer = 'X';
+  } $('.square').on('click', (event) => {
+    if ($(event.target).text() === '') {
+      $(event.target).text(currentPlayer);
+    } switchTurn(parseInt(event.target.id));
+  });
 };
 
 //2. Me and the group I was working with realized that we needed to come up with all the winning combinations of the game. I know where are a few more code efficient ways of doing this, but I also think it is the simplest and that is my interpretation of best practice. There is a message div in my HTML I included after making the skeleton on this to display the winner. We want to return true after each possible combination of a successfully completed game has occurred.
@@ -72,13 +77,13 @@ const switchTurn = function (index) {
 };
 
 //4. This was an event handler that moved around a lot between the engine here and the events.js file. I am still a bit unfamiliar with the rocket syntax, so I wanted to make a point to use it. Whenever a user clicks on a square, the text of current player, which is x or o, will appear in that target of the event. The switch turn function is then applied to the id value of the divs in our table, which were given div values with string id's and converted to numbers with parseInt. I got a lot of help with this part. It is pretty obvious that we want an x or o to appear in the boxes, but using event.target was a concept i struggled with as well as applying parseInt to get the indexes as converted string values.
-  $('.square').on('click', (event) => {
-    if ($(event.target).text() === '') {
-      $(event.target).text(currentPlayer);
-    }
+$('.square').on('click', (event) => {
+  if ($(event.target).text() === '') {
+    $(event.target).text(currentPlayer);
+  }
 //Just to be extra clear, event.target.id refers to the element that triggered the event
     switchTurn(parseInt(event.target.id));
-  });
+});
 
 //6. we must write module.exports to make the functions created in this file available throughout the program. Forgetting this was the cause of a few errors along the way in this and other files.
 module.exports = {
