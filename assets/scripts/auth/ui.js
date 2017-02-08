@@ -6,6 +6,7 @@ const success = (data) => {
 
 const failure = (error) => {
   console.error(error);
+  $('.message').text('ERROR!');
 };
 
 const signUpSuccess = (data) => {
@@ -13,6 +14,8 @@ const signUpSuccess = (data) => {
   if (data) {
     console.log(data);
   }
+  $('#sign-up')[0].reset();
+  $('.message').text('Success!');
 };
 
 const signInSuccess = (data) => {
@@ -21,22 +24,25 @@ const signInSuccess = (data) => {
    $('#sign-in').hide();
    $('#change-password').show();
    $('.after-signin').show();
+   $('.message').text('Success!');
 
    if (data) {
      console.log(data);
    }
+   $('#sign-in')[0].reset();
 };
 const signOutSuccess = () => {
   $('.after-signin').hide();
   $('#change-password').hide();
   $('.board').hide();
-  $('.message').hide();
+  //$('.message').hide();
   // $('.games-played').hide().val('');
   $('#sign-in').show();
   $('#sign-up').show();
   // if (data) {
   //   console.log(data);
   // }
+  $('.message').text('Success!');
 };
 const createGameSuccess = () => {
   $('.message').show();

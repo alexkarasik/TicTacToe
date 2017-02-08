@@ -46,6 +46,7 @@ const onChangePassword = function (event) {
   api.changePassword(data)
   .then(function (response) {
     $('.message').text("password changed")
+    $('#change-password')[0].reset();
   })
  .then(ui.success)
  .catch(ui.failure);

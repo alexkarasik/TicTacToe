@@ -1,5 +1,5 @@
 # link
-
+[link txt]https://alexkarasik.github.io/TicTacToe/
 
 # Technologies used
 I used HTML, CSS, Javscript and Jquery for this project.
@@ -19,5 +19,10 @@ I am curious about how to make the game multiplayer and should make it more
 attractive with additional CSS work, but I believe I have met all of the
 
 # Wireframe
+[link txt](url: http://imgur.com/a/itfQk)
 
-# User Srtories
+# User Stories
+As a user, I want to be able to sign in and sign out securely.
+As a user, I want a message after I successfully complete a task, especially regarding signing in or password issues.
+As a user, I want a message displayed after any player wins because It will make the experience go smoother.
+As a user, I want to be able to easily start a new game with a clearly labeled button.
