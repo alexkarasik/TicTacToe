@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Tic Tac ToE BY Alex K</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Do not add `link` tags unless you know what you are doing -->
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+  <!-- Do not add `script` tags unless you know what you are doing -->
+  <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+  <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+</head>
+
+<body class="container-fluid">
+
+
+
+
+  <h1>Tic Tac Toe</h1>
+  <h3>By Alex Karasik</h3>
+
+
+  <!-- Button trigger modal -->
+  <form id="sign-up">
+          <fieldset>
+            <legend>Sign up!</legend>
+            <label>
+              Email
+              <input type="text" name="credentials[email]">
+            </label>
+            <label>
+              Password
+              <input type="password" name="credentials[password]">
+            </label>
+            <label>
+              Password Confirmation
+              <input type="password" name="credentials[password_confirmation]">
+            </label>
+            <input type="submit" name="submit" value="Sign up!">
+          </fieldset>
+        </form>
+
+        <form id="sign-in">
+          <fieldset>
+            <legend>Sign in!</legend>
+            <label>
+              Email
+              <input type="text" name="credentials[email]">
+            </label>
+            <label>
+              Password
+              <input type="password" name="credentials[password]">
+            </label>
+            <input type="submit" name="submit" value="Sign in!">
+          </fieldset>
+        </form>
+
+        <form id="change-password">
+          <fieldset>
+            <legend>Change Password!</legend>
+            <label>
+              Current Password
+              <input type="password" name="passwords[old]">
+            </label>
+            <label>
+              New Password
+              <input type="password" name="passwords[new]">
+            </label>
+
+            <input type="submit" name="submit" value="Change Password!">
+          </fieldset>
+      </form>
+
+<div class="after-signin">
+  <form id="sign-out">
+    <fieldset>
+    <legend>Sign Out!</legend>
+      <input type="submit" name="submit" value="Sign Out!" >
+    </fieldset>
+  </form>
+
+
+
+
+
+      <button id="play-again-button">New Game</button>
+
+
+
+      <button id="previous-games">Show History</button>
+
+</div>
+
+
+
+
+
+<h2 class='message'></h2>
+
+<div class="board" id="newGame">
+
+  <div class="row">
+    <div class="square" id="0"></div>
+    <div class="square" id="1"></div>
+    <div class="square" id="2"></div>
+  </div>
+  <div class="row">
+    <div class="square" id="3"></div>
+    <div class="square" id="4"></div>
+    <div class="square" id="5"></div>
+  </div>
+  <div class="row">
+    <div class="square" id="6"></div>
+    <div class="square" id="7"></div>
+    <div class="square" id="8"></div>
+  </div>
+
+</div>
+
+</body>
+
+</html>
