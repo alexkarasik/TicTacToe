@@ -2,18 +2,19 @@
 
 const success = (data) => {
   console.log(data);
+    $('.message').text('SUCCESS!');
 };
 
 const failure = (error) => {
-  console.error(error);
+  // console.error(error);
   $('.message').text('ERROR!');
 };
 
 const signUpSuccess = (data) => {
   $('#sign-up').hide();
-  if (data) {
-    console.log(data);
-  }
+  // if (data) {
+  //   console.log(data);
+  // }
   $('#sign-up')[0].reset();
   $('.message').text('Success!');
 };
@@ -26,9 +27,9 @@ const signInSuccess = (data) => {
    $('.after-signin').show();
    $('.message').text('Success!');
 
-   if (data) {
-     console.log(data);
-   }
+  //  if (data) {
+  //    console.log(data);
+  //  }
    $('#sign-in')[0].reset();
 };
 const signOutSuccess = () => {
