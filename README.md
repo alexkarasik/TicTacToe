@@ -19,7 +19,7 @@ I am curious about how to make the game multiplayer and should make it more
 attractive with additional CSS work, but I believe I have met all of the
 
 # Wireframe
-![link txt](http://imgur.com/a/itfQk)
+http://imgur.com/a/itfQk
 
 # User Stories
 As a user, I want to be able to sign in and sign out securely.
