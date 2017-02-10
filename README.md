@@ -1,5 +1,5 @@
 # link
-[link txt]https://alexkarasik.github.io/TicTacToe/
+https://alexkarasik.github.io/TicTacToe/
 
 # Technologies used
 I used HTML, CSS, Javscript, AJAX and Jquery for this project.
@@ -19,7 +19,7 @@ I am curious about how to make the game multiplayer and should make it more
 attractive with additional CSS work, but I believe I have met all of the
 
 # Wireframe
-[link txt](url: http://imgur.com/a/itfQk)
+![link txt](http://imgur.com/a/itfQk)
 
 # User Stories
 As a user, I want to be able to sign in and sign out securely.

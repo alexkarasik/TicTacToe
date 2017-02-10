@@ -1,16 +1,16 @@
 'use strict';
 
-const success = (data) => {
-  console.log(data);
+const success = () => {
+  //console.log(data);
     $('.message').text('SUCCESS!');
 };
 
-const failure = (error) => {
+const failure = () => {
   // console.error(error);
   $('.message').text('ERROR!');
 };
 
-const signUpSuccess = (data) => {
+const signUpSuccess = () => {
   $('#sign-up').hide();
   // if (data) {
   //   console.log(data);
@@ -19,7 +19,7 @@ const signUpSuccess = (data) => {
   $('.message').text('Success!');
 };
 
-const signInSuccess = (data) => {
+const signInSuccess = () => {
    $('#sign-up').val('');
    $('#sign-up').hide();
    $('#sign-in').hide();
