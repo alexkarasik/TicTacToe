@@ -2,7 +2,7 @@
 [link txt]https://alexkarasik.github.io/TicTacToe/
 
 # Technologies used
-I used HTML, CSS, Javscript and Jquery for this project.
+I used HTML, CSS, Javscript, AJAX and Jquery for this project.
 
 # Development Process and Planning
 I made a number of mistakes initially with this project and just made a front
